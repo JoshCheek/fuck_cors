@@ -10,6 +10,7 @@ serve 3011, {
     <h1>A remotely created user:</h1>
     <p>from #{request_headers['Host'].inspect}, to #{remote.inspect}</p>
     <div id=div></div>
+
     <script>
     fetch("#{remote}/users", {
       method: 'POST',
@@ -20,7 +21,7 @@ serve 3011, {
       },
     })
     .then(
-      async (res) => div.innerText = await res.json(),
+      async (res) => div.innerText = JSON.stringify(await res.json()),
       async (err) => div.innerText = err,
     )
     </script>
