@@ -25,6 +25,8 @@ And another to localhost:3010
 You should see the requests that the browser is making to the server,
 and how the server is responding incorrectly (404).
 
+![screenshot](screenshot.png)
+
 Then check out https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 and figure out what the responses should be (I recommend keeping
 `Access-Control-Max-Age` set pretty small (I set it to 5), otherwise
