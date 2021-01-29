@@ -32,6 +32,7 @@ class Log
   end
 
   def request_line(method, path, protocol)
+    method = hilight method if method == 'OPTIONS'
     line "\e[36;4;1m#{method}\e[0m \e[35m#{path}\e[0m #{protocol}"
   end
 
@@ -40,7 +41,8 @@ class Log
   end
 
   def header(name, value)
-    line "\e[34m#{name}:\e[0m #{value}" # keys are blue
+    name = hilight name if name.start_with?('Access-Control') || name == 'Vary' || name == 'Origin'
+    line "\e[34m#{name}\e[0m: #{value}" # keys are blue
   end
 
   def body(body, content_type)
@@ -69,10 +71,15 @@ class Log
   def print(str)
     stream.print str
   end
+
+  def hilight(str)
+    "\e[38;2;255;255;0m#{str}\e[0m" # bright yellow
+  end
 end
 
 def human_status(code)
   return 'OK'                    if code == 200
+  return 'No Content'            if code == 204
   return 'Moved Permanently'     if code == 301
   return 'See Other'             if code == 303
   return 'Bad Request'           if code == 400

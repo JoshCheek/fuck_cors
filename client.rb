@@ -16,11 +16,11 @@ serve 3011, {
       body:   '{"name":"Josh"}',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
       },
     })
     .then(
-      async (res) => div.innerText = await res.json(),
+      async (res) => div.innerText = JSON.stringify(await res.json()),
       async (err) => div.innerText = err,
     )
     </script>
